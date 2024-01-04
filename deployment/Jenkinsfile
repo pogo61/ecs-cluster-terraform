@@ -1,0 +1,61 @@
+pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
+
+    environment {
+        TERRAFORM = "/opt/terraform/terraform-1.1.5"
+    }
+
+    parameters {
+        choice(
+          name: 'ENVIRONMENT',
+          choices: [
+            'test',
+            'management',
+            'production',
+            'staging',
+            'sandbox'
+            ],
+          description: 'Pick the environment to run terraform against.'
+        )
+      }
+
+    stages {
+        stage('Terraform Init') {
+            steps {
+                sh '''
+                    cd deployment/${ENVIRONMENT,,}
+                    $TERRAFORM init
+                '''
+            }
+        }
+        stage('Terraform Plan') {
+            steps {
+                ansiColor('xterm') {
+                    echo "Running terraform plan"
+                    sh '''
+                        cd deployment/${ENVIRONMENT,,}
+                        $TERRAFORM plan -out "$ENVIRONMENT-$BUILD_NUMBER.plan"
+                    '''
+                }
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                ansiColor('xterm') {
+                    timeout(unit: 'HOURS', time: 12) {
+                        input message: 'Do you wish to apply the Terraform Plan?', ok: 'Run Terraform Apply'
+                    }
+                    echo "Running terraform apply"
+                    sh '''
+                        cd deployment/${ENVIRONMENT,,}
+                        $TERRAFORM apply "$ENVIRONMENT-$BUILD_NUMBER.plan"
+                    '''
+                }
+            }
+        }
+    }
+}

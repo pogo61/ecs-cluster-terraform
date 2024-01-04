@@ -1,0 +1,4 @@
+boto3
+joblib
+argparse
+requests==2.25.1

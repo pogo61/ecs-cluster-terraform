@@ -1,0 +1,67 @@
+pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
+
+    triggers {
+        cron('H 8 * * 1-5')
+    }
+
+    environment {
+        ENVIRONMENT = "management"
+    }
+
+    stages {
+        stage('Terraform Init') {
+            steps {
+                sh '''
+                    ls $WORKSPACE/deployment
+                    cd $WORKSPACE/deployment/${ENVIRONMENT,,}
+                    /opt/terraform/terraform-1.1.5 init
+                '''
+            }
+        }
+        stage('Terraform Plan') {
+            steps {
+                ansiColor('xterm') {
+                    echo "Running terraform plan"
+                    sh '''
+                        cd $WORKSPACE/deployment/${ENVIRONMENT,,}
+                        /opt/terraform/terraform-1.1.5 plan
+                    '''
+                }
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                ansiColor('xterm') {
+                    echo "Running terraform apply"
+                    sh '''
+                        cd $WORKSPACE/deployment/${ENVIRONMENT,,}
+                        # stop Prometheus as it cant run more than one container at a time
+                        # hack to avoid re-engineering it as the plan is to decomission, shouldn't really be on ecs in this state.
+                        aws ecs update-service --cluster ManagementCluster --service Prometheus --desired-count 0 --region eu-west-1
+
+                        /opt/terraform/terraform-1.1.5 apply --auto-approve
+
+                        # give time for instance refresh to start
+                        sleep 300
+
+                        # wait for instance refresh to finish
+                        while aws autoscaling describe-instance-refreshes --auto-scaling-group-name 'ECS ManagementCluster' | grep -q InProgress
+                        do
+                            echo "Waiting for instance refresh to finish"
+                            sleep 60
+                        done
+
+                        # start Prometheus back up
+                        aws ecs update-service --cluster ManagementCluster --service Prometheus --desired-count 1 --region eu-west-1
+
+                    '''
+                }
+            }
+        }
+    }
+}

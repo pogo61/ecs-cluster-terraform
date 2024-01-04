@@ -1,0 +1,53 @@
+@Library('pipeline-common@master') _
+
+if (env.JOB_NAME.contains('test')) {
+    env.CHOICES='\nTest-Checkit-Tom' + '\nSandbox-temp'
+} else {
+    env.CHOICES=''
+}
+
+pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
+
+    parameters {
+        string(name: 'TARGET', defaultValue: 'checkit-ENV', description: 'Target Environment or Service to perform action on. Should either be a full service name or environment prefix.')
+        choice(
+          name: 'ACTION',
+          choices: [
+            'start',
+            'stop'
+            ],
+          description: 'Pick the action to perform against the chosen service.'
+        );
+        choice(
+            name: 'CLUSTER',
+            choices: getDefaultStage().capitalize() + env.CHOICES,
+            description: 'Name of cluster to be used'
+        );
+    }
+
+    environment {
+        AWS_DEFAULT_REGION = "eu-west-1"
+        PYTHONUNBUFFERED = true
+    }
+
+    stages {
+        stage('Change Environment to Desired State') {
+            steps {
+              dir("auto-start-stop") {
+                sh '''
+                    python3 -m venv venv/
+                    source venv/bin/activate
+                    pip3 install -r requirements.txt
+                    python3 main.py --service $TARGET --cluster $CLUSTER --action $ACTION
+                    deactivate
+                '''
+              }
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
+
+    triggers {
+        cron('TZ=Europe/London\nH(0-29) 06 * * 1-5')
+    }
+
+    environment {
+        AWS_DEFAULT_REGION = "eu-west-1"
+        CLUSTER = "Test"
+    }
+
+    stages {
+        stage('Change Environment to Desired State') {
+            steps {
+              dir("auto-start-stop") {
+                sh '''
+                    python3 -m venv venv/
+                    source venv/bin/activate
+                    pip3 install -r requirements.txt
+                    python3 main.py --cluster $CLUSTER --action start
+                    deactivate
+                '''
+              }
+            }
+        }
+    }
+}

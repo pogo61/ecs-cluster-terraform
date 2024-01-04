@@ -1,0 +1,49 @@
+pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
+
+    triggers {
+        cron('H 6 * * 2')
+    }
+
+    environment {
+        ENVIRONMENT = "test"
+    }
+
+    stages {
+        stage('Terraform Init') {
+            steps {
+                sh '''
+                    ls $WORKSPACE/deployment
+                    cd $WORKSPACE/deployment/${ENVIRONMENT,,}
+                    /opt/terraform/terraform-1.1.5 init -var environment=$ENVIRONMENT
+                '''
+            }
+        }
+        stage('Terraform Plan') {
+            steps {
+                ansiColor('xterm') {
+                    echo "Running terraform plan"
+                    sh '''
+                        cd $WORKSPACE/deployment/${ENVIRONMENT,,}
+                        /opt/terraform/terraform-1.1.5 plan -var environment=$ENVIRONMENT
+                    '''
+                }
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                ansiColor('xterm') {
+                    echo "Running terraform apply"
+                    sh '''
+                        cd $WORKSPACE/deployment/${ENVIRONMENT,,}
+                        /opt/terraform/terraform-1.1.5 apply --auto-approve -var environment=$ENVIRONMENT
+                    '''
+                }
+            }
+        }
+    }
+}

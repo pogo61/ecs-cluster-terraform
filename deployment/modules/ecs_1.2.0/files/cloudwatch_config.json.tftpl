@@ -1,0 +1,57 @@
+{
+  "agent": {
+    "metrics_collection_interval": 60,
+    "run_as_user": "root"
+  },
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/var/log/*",
+            "log_group_name": "${cloudwatch_log_group}",
+            "log_stream_name": "{instance_id}/other"
+          },
+          {
+            "file_path": "/var/log/ecs/*",
+            "log_group_name": "${cloudwatch_log_group}",
+            "log_stream_name": "{instance_id}/ecs"
+          }
+        ]
+      }
+    }
+  },
+  "metrics": {
+    "append_dimensions": {
+      "AutoScalingGroupName": "$${aws:AutoScalingGroupName}",
+      "ImageId": "$${aws:ImageId}",
+      "InstanceId": "$${aws:InstanceId}",
+      "InstanceType": "$${aws:InstanceType}"
+    },
+    "aggregation_dimensions": [["InstanceId","AutoScalingGroupName"], ["AutoScalingGroupName"], ["InstanceId"]],
+    "metrics_collected": {
+      "statsd": {
+        "service_address":":8127",
+        "metrics_collection_interval":60
+      },
+      "disk": {
+        "measurement": [
+          "used_percent",
+          "inodes_free",
+          "inodes_used",
+          "inodes_total"
+        ],
+        "metrics_collection_interval": 60,
+        "resources": [
+          "*"
+        ]
+      },
+      "mem": {
+        "measurement": [
+          "mem_used_percent"
+        ],
+        "metrics_collection_interval": 60
+      }
+    }
+  }
+}

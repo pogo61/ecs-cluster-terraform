@@ -1,0 +1,37 @@
+pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
+
+    environment {
+        AWS_DEFAULT_REGION = "eu-west-1"
+        CLUSTER = "Staging"
+        ATLAS_PUB_KEY = "HIKLQZYF"
+        ATLAS_PRI_KEY = credentials('atlas-jenkins-org-admin')
+    }
+
+    stages {
+        stage('Change Environment to Desired State') {
+            steps {
+              dir("auto-start-stop") {
+                sh '''
+                    python3 -m venv venv/
+                    source venv/bin/activate
+                    pip3 install -r requirements.txt
+                    if [[ "$CLUSTER" == "Staging" ]]; then
+                      python3 mongodb_atlas_resume_pause_clusters.py staging-main Staging resume "$ATLAS_PUB_KEY" "$ATLAS_PRI_KEY"
+                      python3 mongodb_atlas_resume_pause_clusters.py staging-reporting Staging resume "$ATLAS_PUB_KEY" "$ATLAS_PRI_KEY"
+                      python3 mongodb_atlas_resume_pause_clusters.py checkpoint-testing Staging resume "$ATLAS_PUB_KEY" "$ATLAS_PRI_KEY"
+                      python3 main.py --cluster Staging-nonui --action start
+                      python3 main.py --cluster Staging-extra --action start
+                    fi
+                    python3 main.py --cluster $CLUSTER --action start
+                    deactivate
+                '''
+              }
+            }
+        }
+    }
+}
