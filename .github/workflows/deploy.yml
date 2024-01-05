@@ -94,8 +94,8 @@ jobs:
         role-duration-seconds: 1200
         role-session-name: ecs_deploy
 
-    - name: debug environment
-      run: echo "Environment is " >> ${{ inputs.ENVIRONMENT }}
+#    - name: debug environment
+#      run: echo "Environment is " >> ${{ inputs.ENVIRONMENT }}
     - name: debug directory
       run: echo "current directory is " >> $GITHUB_WORKSPACE
 
