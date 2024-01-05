@@ -4,10 +4,10 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    region         = "eu-west-1"
-    bucket         = "checkit-terraform"
-    key            = "checkit-clusters/test-terraform.tfstate"
-    dynamodb_table = "checkit-terraform-locks"
+    region         = "eu-west-2"
+    bucket         = "pp-terraform-status"
+    key            = "platform/test-terraform.tfstate"
+    dynamodb_table = "platform-terraform-locks"
     encrypt        = true
   }
 }
