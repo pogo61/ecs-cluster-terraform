@@ -57,9 +57,6 @@ on:
           - production
           - staging
           - sandbox
-      environment:
-        description: GitHub environment
-        type: environment
   push:
     branches: [ "main" ]
   pull_request:
