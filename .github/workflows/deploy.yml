@@ -94,10 +94,10 @@ jobs:
         role-duration-seconds: 1200
         role-session-name: ecs_deploy
 
-    - name: debug environment
-      run: echo "Environment is " >> ${{ vars.ENVIRONMENT }}
-    - name: debug directory
-      run: echo "current directory is " >> ${GITHUB_WORKSPACE}
+#    - name: debug environment
+#      run: echo "Environment is " >> ${{ vars.ENVIRONMENT }}
+#    - name: debug directory
+#      run: echo "current directory is " >> ${GITHUB_WORKSPACE}
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
