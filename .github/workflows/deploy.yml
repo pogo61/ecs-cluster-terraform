@@ -80,6 +80,7 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
+
     - name: Configure AWS credentials from Test account
       id: creds
       uses: aws-actions/configure-aws-credentials@v4
@@ -92,6 +93,11 @@ jobs:
         role-external-id: ${{ secrets.AWS_ROLE_EXTERNAL_ID }}
         role-duration-seconds: 1200
         role-session-name: ecs_deploy
+
+    - name: debug environment
+      run: echo "Environment is " >> ${{ inputs.ENVIRONMENT }}
+    - name: debug directory
+      run: echo "current directory is " >> $GITHUB_WORKSPACE
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
