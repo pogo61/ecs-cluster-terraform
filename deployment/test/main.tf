@@ -18,7 +18,7 @@ module "security_group" {
   sg_description = "Allows local network"
   vpc_id         = nonsensitive(jsondecode(data.aws_ssm_parameter.vpc_id.value))
   rules          = local.test_rules
-  tags           = {
+  tags = {
     name = "ECS ${var.environment}"
   }
 }
