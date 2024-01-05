@@ -84,12 +84,7 @@ jobs:
       id: creds
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::095955279155:role/github-actions-role
-        aws-region: us-east-2
-        output-credentials: true
-    - name: get caller identity
-      run: |
-        aws sts get-caller-identity
+        managed-session-policies: arn:aws:iam::095955279155:role/github-actions-role
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
