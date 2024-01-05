@@ -45,12 +45,12 @@
 name: 'Deploy ECS'
 
 on:
-  push:
-    branches: [ "main" ]
+  workflow_dispatch:
     inputs:
       env:
         type: choice
         description: environment to deploy
+        default: 'warning'
         options:
           - test
           - management
@@ -58,7 +58,10 @@ on:
           - staging
           - sandbox
       environment:
+        description: GitHub environment
         type: environment
+  push:
+    branches: [ "main" ]
   pull_request:
 
 permissions:
