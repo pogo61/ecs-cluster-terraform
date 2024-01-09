@@ -5,6 +5,6 @@ metadata:
   annotations:
     github.com/project-slug: pogo61/ecs-cluster-terraform
 spec:
-  type: other
-  lifecycle: unknown
+  type: service
+  lifecycle: development
   owner: infrastructure
