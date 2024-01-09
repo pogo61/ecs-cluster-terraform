@@ -1,0 +1,118 @@
+# Define the API version and kind of resource
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+# Template metadata. Here's your intro to what this template does.
+metadata:
+  name: ecs-cluster
+  title: Define an ECS Cluster
+  description: Define an ECS Cluster using Terraform
+  annotations:
+    github.com/project-slug: pogo61/ecs-cluster-terraform
+# The specification for how the template behaves
+spec:
+  # Who owns this template. Generally, it could be a team or individual
+  owner: user:guest
+  # The type of service this template deploys
+  type: service
+  # User-input parameters. Makes your templates dynamic!
+  parameters:
+    # Ask the user to input some basic app details
+    - title: Fill in some steps
+      required:
+        - environment
+      properties:
+        environment:
+          title: Environment to deploy into
+          description: either test, production, staging, management, or sandbox
+          enum:
+            - test
+            - production
+            - staging
+            - management
+            - sandbox
+          ui:autofocus: true  # This field gets auto-focused in UI
+          ui:options:
+            rows: 5  # Number of rows in the input area
+    # Ask the user where they want to store the code
+    - title: Choose a Repo location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker  # A special UI component for selecting repo URLs
+          ui:options:
+            allowedHosts:
+              - github.com  # Allowed hosts for repository
+    # Parameters for setting up the EKS cluster
+    - title: Basic ECS Cluster Configuration
+      required:
+        - region
+        - action
+      properties:
+        region:
+          title: AWS Region
+          type: string
+          description: The AWS region where the cluster will be deployed
+          enum:
+            - eu-west-2
+            - eu-west-1
+        action:
+          title: Action
+          type: string
+          description: Action to perform (apply/destroy)
+          enum:
+            - plan
+            - apply
+            - destroy
+  # Steps that the template will execute in order
+  steps:
+    # Fetch the base template
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:template
+      input:
+        url: ./content  # Where the base content is stored
+        values:
+          name: ecs-cluster
+    
+    # Trigger a GitHub Action to set up the ECS cluster
+    - id: github-action
+      name: Trigger GitHub Action
+      action: github:actions:dispatch
+      input:
+        workflowId: deploy.yml  # GitHub Action workflow ID
+        repoUrl: ${{ parameters.repoUrl }}
+        branchOrTagName: 'main'  # The branch to run this action on
+        workflowInputs:
+          environment: ${{ parameters.environment }}
+          awsRegion: ${{ parameters.region }}
+          action: ${{ parameters.action }}
+    
+    # Publish the code to a GitHub repo with a backstage catalog
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: This is an ecs-cluster-terraform BackStage catalog repo
+        repoUrl: ${{ parameters.repoUrl }}-bs-catalog
+              
+    # Register the new component in the Backstage catalog
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.remoteUrl }}
+        # catalogInfoUrl: http://github.com/backstage/backstage/blob/master/catalog-info.yaml
+        catalogInfoPath: '/catalog-info.yaml'  # Where the catalog info is stored
+  # Output links to the user after the template execution
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps['publish'].output.entityRef }}
+# 
