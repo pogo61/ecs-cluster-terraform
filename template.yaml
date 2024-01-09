@@ -4,8 +4,8 @@ kind: Template
 # Template metadata. Here's your intro to what this template does.
 metadata:
   name: ecs-cluster
-  title: Define an ECS Cluster
-  description: Define an ECS Cluster using Terraform
+  title: Deploy an ECS Cluster
+  description: Deploy an ECS Cluster using Terraform
   annotations:
     github.com/project-slug: pogo61/ecs-cluster-terraform
 # The specification for how the template behaves
@@ -76,7 +76,7 @@ spec:
         url: ./content  # Where the base content is stored
         values:
           name: ecs-cluster
-    
+
     # Trigger a GitHub Action to set up the ECS cluster
     - id: github-action
       name: Trigger GitHub Action
@@ -89,30 +89,30 @@ spec:
           environment: ${{ parameters.environment }}
           awsRegion: ${{ parameters.region }}
           action: ${{ parameters.action }}
-    
-    # Publish the code to a GitHub repo with a backstage catalog
-    - id: publish
-      name: Publish
-      action: publish:github
-      input:
-        allowedHosts: ['github.com']
-        description: This is an ecs-cluster-terraform BackStage catalog repo
-        repoUrl: ${{ parameters.repoUrl }}-bs-catalog
-              
-    # Register the new component in the Backstage catalog
-    - id: register
-      name: Register
-      action: catalog:register
-      input:
-        repoContentsUrl: ${{ steps['publish'].output.remoteUrl }}
-        # catalogInfoUrl: http://github.com/backstage/backstage/blob/master/catalog-info.yaml
-        catalogInfoPath: '/catalog-info.yaml'  # Where the catalog info is stored
-  # Output links to the user after the template execution
-  output:
-    links:
-      - title: Repository
-        url: ${{ steps['publish'].output.remoteUrl }}
-      - title: Open in catalog
-        icon: catalog
-        entityRef: ${{ steps['publish'].output.entityRef }}
-# 
+
+#    # Publish the code to a GitHub repo with a backstage catalog
+#    - id: publish
+#      name: Publish
+#      action: publish:github
+#      input:
+#        allowedHosts: ['github.com']
+#        description: This is an ecs-cluster-terraform BackStage catalog repo
+#        repoUrl: ${{ parameters.repoUrl }}-bs-catalog
+#
+#    # Register the new component in the Backstage catalog
+#    - id: register
+#      name: Register
+#      action: catalog:register
+#      input:
+#        repoContentsUrl: ${{ steps['publish'].output.remoteUrl }}
+#        # catalogInfoUrl: http://github.com/backstage/backstage/blob/master/catalog-info.yaml
+#        catalogInfoPath: '/catalog-info.yaml'  # Where the catalog info is stored
+#  # Output links to the user after the template execution
+#  output:
+#    links:
+#      - title: Repository
+#        url: ${{ steps['publish'].output.remoteUrl }}
+#      - title: Open in catalog
+#        icon: catalog
+#        entityRef: ${{ steps['publish'].output.entityRef }}
+#
