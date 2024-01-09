@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ecs-cluster-terraform
+  annotations:
+    github.com/project-slug: pogo61/ecs-cluster-terraform
+spec:
+  type: other
+  lifecycle: unknown
+  owner: infrastructure
