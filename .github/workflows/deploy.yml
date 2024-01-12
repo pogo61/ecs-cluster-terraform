@@ -5,13 +5,13 @@ on:
     # Define inputs that are required for the manual trigger
     inputs:
       environment:
-        description: 'Name of the EKS cluster'  # What's this input for?
+        description: 'Name of the ECS cluster'  # What's this input for?
         required: true  # Is it optional or required?
       awsRegion:
         description: 'AWS Region for the cluster'
         required: true
       action:
-        description: 'Action to perform (apply/destroy)'
+        description: 'Action to perform (plan/apply/destroy)'
         required: true
 
 jobs:
@@ -129,3 +129,58 @@ jobs:
         working-directory: ./deployment/${{ inputs.environment }}
         if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
+
+
+  destroy:
+    name: run Terraform Destroy
+    runs-on: ubuntu-latest
+
+    # Only run this job if the action input is "plan"
+    if: ${{ github.event.inputs.action == 'destroy' }}
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials from Test account
+      id: creds
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-skip-session-tagging: true
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-west-2
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+        role-external-id: ${{ secrets.AWS_ROLE_EXTERNAL_ID }}
+        role-duration-seconds: 1200
+        role-session-name: ecs_deploy
+
+    #    - name: debug environment
+    #      run: echo "Environment is " >> ${{ vars.ENVIRONMENT }}
+    #    - name: debug directory
+    #      run: echo "current directory is " >> ${GITHUB_WORKSPACE}
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      working-directory: ./deployment/${{ inputs.environment }}
+      run: terraform init
+
+    # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Format
+      working-directory: ./deployment/${{ inputs.environment }}
+      run: terraform fmt -check
+
+    - name: Destroy
+      working-directory: ./deployment/${{ inputs.environment }}
+      run: terraform destroy -var="environment=${{ inputs.environment }}"
