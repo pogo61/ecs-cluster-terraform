@@ -1,5 +1,5 @@
 apiVersion: iac-support.backstage.io/v1alpha1
-kind: Environment
+kind: iac-support.backstage.io/EnvironmentV1alpha1
 metadata:
   name: my-corp-test
   description: 'test aws account for my corp'
