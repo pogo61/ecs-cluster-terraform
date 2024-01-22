@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Environment
+metadata:
+  name: my-corp-test
+  description: 'test aws account for my corp'
+spec:
+  owner: "platform-team",
+  domain: "infrastructure"
