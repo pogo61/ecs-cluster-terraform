@@ -4,5 +4,5 @@ metadata:
   name: my-corp-test
   description: 'test aws account for my corp'
 spec:
-  owner: "platform-team",
+  owner: "infrastructure",
   domain: "infrastructure"
