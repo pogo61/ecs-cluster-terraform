@@ -3,8 +3,6 @@ kind: Environment
 metadata:
   name: my-company-dev
   description: 'dev environment for My Company'
-  annotations:
-    backstage.io/techdocs-ref: value
 spec:
   owner: platform-team
   domain: infrastructure
