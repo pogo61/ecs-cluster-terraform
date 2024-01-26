@@ -3,8 +3,12 @@ kind: Environment
 metadata:
   name: my-company-dev
   description: 'dev environment for My Company'
-ownerOf:
-  - ecs_1.2.0
+relations:
+  - type: backstage.io/hasPart
+    entity:
+      kind: ResourceComponent
+      namespace: default
+      name: ecs_1.2.0
 spec:
   owner: platform-team
   domain: infrastructure
