@@ -4,7 +4,7 @@ metadata:
   name: my-company-dev
   description: 'dev environment for My Company'
 ownerOf:
-  - resourcecomponent:ecs_1.2.0
+  - ecs_1.2.0
 spec:
   owner: platform-team
   domain: infrastructure
