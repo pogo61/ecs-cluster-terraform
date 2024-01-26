@@ -3,9 +3,9 @@ kind: ResourceComponent
 metadata:
   name: ecs_1.2.0
   description: ecs terraform module
-relations:
-  - type: ownedBy
-    targetRef: environment:my-company-dev
+  relations:
+    - type: ownedBy
+      targetRef: environment:my-company-dev
 spec:
   type: terraform
   lifecycle: experimental
