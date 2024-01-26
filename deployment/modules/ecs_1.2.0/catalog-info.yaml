@@ -14,4 +14,4 @@ spec:
     - environment
     - awsRegion
     - action
-  environment: ecs-terraform-cluster
+  environment: my-company-dev
