@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: ResourceComponent
+spec:
+  type: terraform
+  lifecycle: experimental
+  owner: platform-team;
+  providesVariables: [environment, awsRegion, action];
+  dependsOn: [asg.tf, cloudwatch.tf,data.tf,dynamo.tf,ecs.tf,iam.tf,lambda.tf];
+  environment?: ecs-terraform-cluster;
