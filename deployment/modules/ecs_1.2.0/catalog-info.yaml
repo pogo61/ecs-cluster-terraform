@@ -4,11 +4,8 @@ metadata:
   name: ecs_1.2.0
   description: ecs terraform module
 relations:
-  - type: backstage.io/partOf
-    entity:
-      kind: Environment
-      namespace: default
-      name: my-company-dev
+  - type: ownedBy
+    targetRef: environment:my-company-dev
 spec:
   type: terraform
   lifecycle: experimental
