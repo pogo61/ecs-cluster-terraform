@@ -3,9 +3,8 @@ kind: Environment
 metadata:
   name: my-company-dev
   description: 'dev environment for My Company'
-relations:
-  type: ownerOf
-  targetRef: resourcecomponent:ecs_1.2.0
+ownerOf:
+  - resourcecomponent:ecs_1.2.0
 spec:
   owner: platform-team
   domain: infrastructure
