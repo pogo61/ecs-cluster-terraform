@@ -4,7 +4,7 @@ metadata:
   name: ecs_1.2.0
   description: ecs terraform module
   relations:
-    - type: ownedBy
+    - type: memberOf
       targetRef: environment:my-company-dev
 spec:
   type: terraform
