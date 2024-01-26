@@ -14,12 +14,4 @@ spec:
     - environment
     - awsRegion
     - action
-  dependsOn:
-    - asg.tf
-    - cloudwatch.tf
-    - data.tf
-    - dynamo.tf
-    - ecs.tf
-    - iam.tf
-    - lambda.tf
   environment: ecs-terraform-cluster
