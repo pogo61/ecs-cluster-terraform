@@ -1,5 +1,5 @@
 apiVersion: iac-support.backstage.io/v1alpha1,
-kind": Environment
+kind: Environment
 metadata:
   name: my-company-dev
   description: 'dev environment for My Company'
