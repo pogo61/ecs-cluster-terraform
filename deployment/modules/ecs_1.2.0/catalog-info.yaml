@@ -5,7 +5,7 @@ metadata:
   description: ecs terraform module
 relations:
   type: ownedBy
-  targetRef: "environment:my-company-dev"
+  targetRef: environment:my-company-dev
 spec:
   type: terraform
   lifecycle: experimental
