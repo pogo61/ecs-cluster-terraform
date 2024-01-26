@@ -1,5 +1,8 @@
 apiVersion: backstage.io/v1alpha1
 kind: ResourceComponent
+"metadata":
+  name: ecs_1.2.0
+  description: ecs terraform module
 spec:
   type: terraform
   lifecycle: experimental
