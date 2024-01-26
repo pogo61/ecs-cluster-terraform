@@ -1,8 +1,8 @@
-apiVersion: iac-support.backstage.io/v1alpha1
-kind: Environment
+apiVersion: iac-support.backstage.io/v1alpha1,
+kind": Environment
 metadata:
-  name: my-corp-test
-  description: 'test aws account for my corp'
+  name: my-company-dev
+  description: 'dev environment for My Company'
 spec:
   owner: platform-team
   domain: infrastructure
