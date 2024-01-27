@@ -112,7 +112,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: ResourceComponent
 metadata:
-  name: lamda
+  name: lambda
   description: asg terraform module
 #  relations:
 #    - type: memberOf
