@@ -3,9 +3,6 @@ kind: ResourceComponent
 metadata:
   name: ecs_1.2.0
   description: ecs terraform module
-#  relations:
-#    - type: memberOf
-#      targetRef: environment:my-company-dev
 spec:
   type: terraform
   lifecycle: experimental
@@ -15,11 +12,114 @@ spec:
     - awsRegion
     - action
   dependsOn:
-    - resource:asg.tf
-    - resource:cloudwatch.tf
-    - resource:data.tf
-    - resource:dynamo.tf
-    - resource:ecs.tf
-    - resource:iam.tf
-    - resource:lambda.tf
+    - resourcecomponent:asg
+    - resourcecomponent:cloudwatch
+    - resourcecomponent:data
+    - resourcecomponent:dynamo
+    - resourcecomponent:ecs
+    - resourcecomponent:iam
+    - resourcecomponent:lambda
+  environment: my-company-dev
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: ResourceComponent
+metadata:
+  name: asg
+  description: asg terraform module
+spec:
+  type: terraform
+  lifecycle: experimental
+  owner: platform-team
+  subcomponentOf: ecs_1.2.0
+  environment: my-company-dev
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: ResourceComponent
+metadata:
+  name: cloudwatch
+  description: asg terraform module
+spec:
+  type: terraform
+  lifecycle: experimental
+  owner: platform-team
+  subcomponentOf: ecs_1.2.0
+  environment: my-company-dev
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: ResourceComponent
+metadata:
+  name: data
+  description: asg terraform module
+spec:
+  type: terraform
+  lifecycle: experimental
+  owner: platform-team
+  subcomponentOf: ecs_1.2.0
+  environment: my-company-dev
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: ResourceComponent
+metadata:
+  name: dynamo
+  description: asg terraform module
+#  relations:
+#    - type: memberOf
+#      targetRef: environment:my-company-dev
+spec:
+  type: terraform
+  lifecycle: experimental
+  owner: platform-team
+  subcomponentOf: ecs_1.2.0
+  environment: my-company-dev
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: ResourceComponent
+metadata:
+  name: ecs
+  description: asg terraform module
+#  relations:
+#    - type: memberOf
+#      targetRef: environment:my-company-dev
+spec:
+  type: terraform
+  lifecycle: experimental
+  owner: platform-team
+  subcomponentOf: ecs_1.2.0
+  environment: my-company-dev
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: ResourceComponent
+metadata:
+  name: iam
+  description: asg terraform module
+#  relations:
+#    - type: memberOf
+#      targetRef: environment:my-company-dev
+spec:
+  type: terraform
+  lifecycle: experimental
+  owner: platform-team
+  subcomponentOf: ecs_1.2.0
+  environment: my-company-dev
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: ResourceComponent
+metadata:
+  name: lamda
+  description: asg terraform module
+#  relations:
+#    - type: memberOf
+#      targetRef: environment:my-company-dev
+spec:
+  type: terraform
+  lifecycle: experimental
+  owner: platform-team
+  subcomponentOf: ecs_1.2.0
   environment: my-company-dev
