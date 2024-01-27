@@ -9,3 +9,27 @@ metadata:
 spec:
   owner: platform-team
   domain: infrastructure
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group,
+metadata:
+  name: platform-team
+  description: The team responsible for dev velocity
+spec:
+  type: business-unit,
+  profile:
+    displayName: platform-team
+    email: platform-team@example.com,
+    picture: https://example.com/groups/bu-infrastructure.jpeg
+  parent: other,
+  children: backstage
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: Infrastructure
+  description: Everything about Infrastructure
+spec:
+  owner: other
