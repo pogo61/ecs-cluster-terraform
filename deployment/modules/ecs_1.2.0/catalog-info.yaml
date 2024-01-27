@@ -14,4 +14,12 @@ spec:
     - environment
     - awsRegion
     - action
+  dependsOn:
+    - resource:asg.tf
+    - resource:cloudwatch.tf
+    - resource:data.tf
+    - resource:dynamo.tf
+    - resource:ecs.tf
+    - resource:iam.tf
+    - resource:lambda.tf
   environment: my-company-dev
