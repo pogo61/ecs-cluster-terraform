@@ -32,7 +32,6 @@ spec:
   lifecycle: experimental
   owner: platform-team
   subcomponentOf: ecs_1.2.0
-  environment: my-company-dev
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -45,7 +44,6 @@ spec:
   lifecycle: experimental
   owner: platform-team
   subcomponentOf: ecs_1.2.0
-  environment: my-company-dev
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -58,7 +56,6 @@ spec:
   lifecycle: experimental
   owner: platform-team
   subcomponentOf: ecs_1.2.0
-  environment: my-company-dev
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -66,15 +63,11 @@ kind: ResourceComponent
 metadata:
   name: dynamo
   description: asg terraform module
-#  relations:
-#    - type: memberOf
-#      targetRef: environment:my-company-dev
 spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
   subcomponentOf: ecs_1.2.0
-  environment: my-company-dev
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -82,15 +75,11 @@ kind: ResourceComponent
 metadata:
   name: ecs
   description: asg terraform module
-#  relations:
-#    - type: memberOf
-#      targetRef: environment:my-company-dev
 spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
   subcomponentOf: ecs_1.2.0
-  environment: my-company-dev
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -98,15 +87,11 @@ kind: ResourceComponent
 metadata:
   name: iam
   description: asg terraform module
-#  relations:
-#    - type: memberOf
-#      targetRef: environment:my-company-dev
 spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
   subcomponentOf: ecs_1.2.0
-  environment: my-company-dev
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -114,12 +99,8 @@ kind: ResourceComponent
 metadata:
   name: lambda
   description: asg terraform module
-#  relations:
-#    - type: memberOf
-#      targetRef: environment:my-company-dev
 spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
   subcomponentOf: ecs_1.2.0
-  environment: my-company-dev
