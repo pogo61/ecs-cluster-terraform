@@ -22,7 +22,7 @@ spec:
     displayName: platform-team
     email: platform-team@example.com,
     picture: https://example.com/groups/bu-infrastructure.jpeg
-  parent: other,
+  parent: other
   children:
   - backstage
 
@@ -33,4 +33,4 @@ metadata:
   name: Infrastructure
   description: Everything about Infrastructure
 spec:
-  owner: other
+  owner: backstage
