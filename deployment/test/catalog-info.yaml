@@ -23,7 +23,8 @@ spec:
     email: platform-team@example.com,
     picture: https://example.com/groups/bu-infrastructure.jpeg
   parent: other,
-  children: backstage
+  children:
+  - backstage
 
 ---
 apiVersion: backstage.io/v1alpha1
