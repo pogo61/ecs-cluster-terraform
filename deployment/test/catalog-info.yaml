@@ -12,7 +12,7 @@ spec:
 
 ---
 apiVersion: backstage.io/v1alpha1
-kind: Group,
+kind: Group
 metadata:
   name: platform-team
   description: The team responsible for dev velocity
