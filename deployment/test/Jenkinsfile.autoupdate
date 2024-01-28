@@ -6,11 +6,11 @@ pipeline {
     }
 
     triggers {
-        cron('H 6 * * 2')
+        cron('H 3 14-19 * 4')
     }
 
     environment {
-        ENVIRONMENT = "test"
+        ENVIRONMENT = "staging"
     }
 
     stages {

@@ -218,7 +218,7 @@ def update_all_services(ecs_cluster_name, action):
     """
   Stop or Start ALL Services on an ECS Cluster
   """
-    
+
     if action not in ("stop", "start"): raise ValueError(
         "Action passed to update_all_services is not valid. Must be stop or start.")
 
@@ -232,7 +232,7 @@ def update_all_services(ecs_cluster_name, action):
             "PageSize": 100
         }
     )
-    
+
     print(f"Performing a {action} on ALL services that were/are running.")
     for page in services:
         for service in page['serviceArns']:
@@ -282,12 +282,12 @@ def stop_rds_cluster(ecs_cluster_name):
   """
 
     # at the moment only the Staging RDS cluster is stopped. Not used if ECS cluster is Staging-extra or Staging-nonui
-    if "staging" == ecs_cluster_name.lower():
+    if "test" == ecs_cluster_name.lower():
         paginator = _rds_c.get_paginator('describe_db_clusters').paginate()
         for page in paginator:
             for dbcluster in page['DBClusters']:
                 print("cluster found is: ", dbcluster['DBClusterIdentifier'].lower())
-                if "staging" in dbcluster['DBClusterIdentifier'].lower():
+                if "test" in dbcluster['DBClusterIdentifier'].lower():
                     try:
                         response = _rds_c.stop_db_cluster(
                             DBClusterIdentifier=dbcluster['DBClusterIdentifier']
@@ -306,12 +306,12 @@ def start_rds_cluster(ecs_cluster_name):
   """
 
     # at the moment only the Staging RDS cluster is stopped. Not used if ECS cluster is Staging-extra or Staging-nonui
-    if "staging" == ecs_cluster_name.lower():
+    if "test" == ecs_cluster_name.lower():
         paginator = _rds_c.get_paginator('describe_db_clusters').paginate()
         for page in paginator:
             for dbcluster in page['DBClusters']:
                 print("cluster found is: ", dbcluster['DBClusterIdentifier'].lower())
-                if "staging" in dbcluster['DBClusterIdentifier'].lower():
+                if "test" in dbcluster['DBClusterIdentifier'].lower():
                     try:
                         response = _rds_c.start_db_cluster(
                             DBClusterIdentifier=dbcluster['DBClusterIdentifier']

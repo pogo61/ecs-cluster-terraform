@@ -30,7 +30,7 @@ terraform {
  }
 
 module "ecs_cluster" {
-  source   = "../modules/ecs_1.2.0"
+  source   = "../modules/ecs-cluster"
   for_each = var.ecs_clusters
 
   name                      = each.key

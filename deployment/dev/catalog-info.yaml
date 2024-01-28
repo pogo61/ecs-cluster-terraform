@@ -5,7 +5,7 @@ metadata:
   description: 'dev environment for My Company'
 #  relations:
 #    - type: hasMember
-#      targetRef: resourcecomponent:ecs_1.2.0
+#      targetRef: resourcecomponent:ecs-cluster
 spec:
   owner: platform-team
   domain: infrastructure

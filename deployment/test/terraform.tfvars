@@ -1,32 +1,44 @@
+# test lives in production aws vpc
 #environment = "test"
 ecs_clusters = {
-  "Test" = {
-    asg_name                  = "ECS Test"
-    lc_name                   = "ECS Test",
-    lc_instance_type          = "r5a.large",
-    lc_key_name               = "devops-2021-02",
-    lc_security_groups        = ["sg-1656046c", "sg-4544fe3f"],
-    lc_iam_instance_profile   = "arn:aws:iam::095955279155:instance-profile/ecsInstance-Test",
-    lc_enable_monitoring      = true,
-    datadog_enable_monitoring = "Yes",
-    asg_desired_capacity      = 4,
-    asg_min_size              = 1,
-    asg_max_size              = 4,
-    create_auto_stop_table    = true
-    asg_capacity_rebalance    = true
-  }
-  "Test-Checkit-Tom" = {
-    asg_name                = null,
-    lc_name                 = null,
-    lc_instance_type        = "t3a.medium",
-    lc_key_name             = "devops-2021-02",
-    lc_security_groups      = ["sg-1656046c", "sg-4544fe3f"],
-    lc_iam_instance_profile = "arn:aws:iam::095955279155:instance-profile/ecsInstance-Test",
-    asg_desired_capacity    = 1,
+  "Staging" = {
+    asg_name                = "ECS a Staging"
+    lc_name                 = "ECS_Staging",
+    lc_instance_type        = "r5a.large",
+    lc_key_name             = "devops-2020-01",
+    lc_iam_instance_profile = "arn:aws:iam::095955279155:instance-profile/ecsInstance-Staging",
     asg_min_size            = 1,
-    asg_max_size            = 1,
-    create_auto_stop_table  = false
-    asg_capacity_rebalance  = false
+    asg_desired_capacity    = 1,
+    asg_max_size            = 3,
+    lc_enable_monitoring    = true,
+    create_auto_stop_table  = true,
+    asg_capacity_rebalance  = true
+  },
+  "Staging-nonui" = {
+    asg_name                = "ECS Staging-nonui"
+    lc_name                 = "ECS_Staging-nonui",
+    lc_instance_type        = "t3.large",
+    lc_key_name             = "devops-infrastructure",
+    lc_iam_instance_profile = "arn:aws:iam::095955279155:instance-profile/ecsInstance-Staging-nonui",
+    asg_min_size            = 1,
+    asg_desired_capacity    = 1,
+    asg_max_size            = 2,
+    lc_enable_monitoring    = true,
+    create_auto_stop_table  = true,
+    asg_capacity_rebalance  = true
+  },
+  "Staging-extra" = {
+    asg_name                = "ECS Staging-extra"
+    lc_name                 = "ECS_Staging-extra",
+    lc_instance_type        = "t3.large",
+    lc_key_name             = "devops-infrastructure",
+    lc_iam_instance_profile = "arn:aws:iam::095955279155:instance-profile/ecsInstance-Staging-extra",
+    asg_min_size            = 1,
+    asg_desired_capacity    = 1,
+    asg_max_size            = 2,
+    lc_enable_monitoring    = true,
+    create_auto_stop_table  = true,
+    asg_capacity_rebalance  = true
   }
 }
 

@@ -6,10 +6,16 @@ variable "aws_region" {
 
 variable "environment" {
   type        = string
-  description = "Deployment environment"
+  description = "AWS environment"
+}
+variable "ecs_clusters" {
+  type = any
 }
 
-variable "ecs_clusters" {}
+variable "instance_refresh" {
+  description = "If set to true any changes to the launch config or asg (by terraform) will trigger an instance refresh automatically."
+  type        = bool
+}
 
 variable "image_does_not_exist_action" {
   description = "Action to take if service relies on an image that does not exist. Available actions are: STOP_SERVICE, WAIT"
@@ -39,9 +45,4 @@ variable "teams_webhook_url_testers" {
 variable "report_cron_schedule" {
   description = "CRON to apply to the report lambda. This will determine how often a report is generated and sent into Teams."
   type        = string
-}
-
-variable "instance_refresh" {
-  description = "If set to true any changes to the launch config or asg (by terraform) will trigger an instance refresh automatically."
-  type        = bool
 }

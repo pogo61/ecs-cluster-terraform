@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: ResourceComponent
 metadata:
-  name: ecs_1.2.0
+  name: ecs_cluster
   description: ecs terraform module
 spec:
   type: terraform
@@ -31,7 +31,7 @@ spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs_1.2.0
+  subcomponentOf: ecs-cluster
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -43,7 +43,7 @@ spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs_1.2.0
+  subcomponentOf: ecs-cluster
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -55,7 +55,7 @@ spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs_1.2.0
+  subcomponentOf: ecs-cluster
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -67,7 +67,7 @@ spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs_1.2.0
+  subcomponentOf: ecs-cluster
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -79,7 +79,7 @@ spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs_1.2.0
+  subcomponentOf: ecs-cluster
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -91,7 +91,7 @@ spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs_1.2.0
+  subcomponentOf: ecs-cluster
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -103,4 +103,4 @@ spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs_1.2.0
+  subcomponentOf: ecs-cluster

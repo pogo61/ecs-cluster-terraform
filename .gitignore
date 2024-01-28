@@ -1,13 +1,13 @@
 ecs-cluster-terraform.iml
 .idea
 */.terraform
-/deployment/test/.terraform
+/deployment/dev/.terraform
 /deployment/production/.terraform
 /deployment/management/.terraform
-/deployment/staging/.terraform
-/deployment/sandbox/.terraform
+/deployment/test/.terraform
+/deployment/Devops sandbox/.terraform
 /deployment/management/.terraform.lock.hcl
 /deployment/production/.terraform.lock.hcl
-/deployment/sandbox/.terraform.lock.hcl
-/deployment/staging/.terraform.lock.hcl
+/deployment/Devops sandbox/.terraform.lock.hcl
 /deployment/test/.terraform.lock.hcl
+/deployment/dev/.terraform.lock.hcl

@@ -442,7 +442,7 @@ def lambda_handler(event, context):
             messageId = record['messageId']
             # Identify if this is the AutoScaling call
             if "autoscaling:TEST_NOTIFICATION" in record['body']:
-                print("Recieved a test notification, returning empty response.")
+                print("Recieved a dev notification, returning empty response.")
                 break
             if "LifecycleHookName" in record['body']:
                 hook_message = json.loads(record['body'])

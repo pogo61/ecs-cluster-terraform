@@ -23,13 +23,13 @@ spec:
       properties:
         environment:
           title: Environment to deploy into
-          description: either test, production, staging, management, or sandbox
+          description: either dev, production, test, management, or Devops sandbox
           enum:
-            - test
+            - dev
             - production
-            - staging
+            - test
             - management
-            - sandbox
+            - Devops sandbox
           ui:autofocus: true  # This field gets auto-focused in UI
           ui:options:
             rows: 5  # Number of rows in the input area
