@@ -27,4 +27,6 @@ So, to make this all work in backstage:
 2. the modules folder catalog-info.yaml's url is given to backstage, and it imports all the ResourceComponent entities defined 
 3. the root template.yaml file's url is given to backstage,imports and makes available a template in the page off the Home-> create menu item.
 
-once you have the IaC plugin set up in your Backstage, import these url's and check out the result.
+For clarity's sake, a catalog-info.yaml file would be needed in every folder (test, Production) that the ECS cluster was deployed into, with the /modules/ecs-cluster catalog-info.yaml modified to include those environments, for this to be shown in Backstage.
+
+Once you have the IaC plugin set up in your Backstage, import these url's and check out the result.
