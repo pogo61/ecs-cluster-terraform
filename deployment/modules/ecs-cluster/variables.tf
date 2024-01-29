@@ -181,19 +181,19 @@ variable "cluster_unstable_action" {
 
 variable "teams_webhook_url_public" {
   description = "Microsoft Teams 365 webhook URL for PUBLIC messages (informative information such as services being stopped due to missing images)."
-  default     = "https://checkitltd.webhook.office.com/webhookb2/c5d24509-3944-485a-b06e-37ac27294f92@c766b904-8fbf-43be-a845-0cab82a691e9/IncomingWebhook/9368eb879d3d4a50925cb4f1c03b93ce/25a519c0-d1aa-419b-b691-07e22a206b4e"
+  default     = ""
   type        = string
 }
 
 variable "teams_webhook_url_private" {
   description = "Microsoft Teams 365 webhook URL for PRIVATE messages (verbose information about autoscaling activity)."
-  default     = "https://checkitltd.webhook.office.com/webhookb2/c5d24509-3944-485a-b06e-37ac27294f92@c766b904-8fbf-43be-a845-0cab82a691e9/IncomingWebhook/55dd5e78d4c043b599e17b1983b3a363/25a519c0-d1aa-419b-b691-07e22a206b4e"
+  default     = ""
   type        = string
 }
 
 variable "teams_webhook_url_testers" {
   description = "Microsoft Teams 365 webhook URL for TESTER messages (reports of services that are unhealthy and may be unable to restart)."
-  default     = "https://checkitltd.webhook.office.com/webhookb2/c5d24509-3944-485a-b06e-37ac27294f92@c766b904-8fbf-43be-a845-0cab82a691e9/IncomingWebhook/55dd5e78d4c043b599e17b1983b3a363/25a519c0-d1aa-419b-b691-07e22a206b4e"
+  default     = ""
   type        = string
 }
 

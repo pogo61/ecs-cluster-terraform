@@ -34,8 +34,8 @@ def notify_teams(message, public=False):
     These environment variables must be set with a VALID webhook for 365
     """
     data = json.dumps({"text": message})
-    _teams_webhook_url_public = os.getenv("TEAMS_WEBHOOK_URL_PUBLIC", "https://checkitltd.webhook.office.com/webhookb2/c5d24509-3944-485a-b06e-37ac27294f92@c766b904-8fbf-43be-a845-0cab82a691e9/IncomingWebhook/9368eb879d3d4a50925cb4f1c03b93ce/25a519c0-d1aa-419b-b691-07e22a206b4e")
-    _teams_webhook_url_private = os.getenv("TEAMS_WEBHOOK_URL_PRIVATE", "https://checkitltd.webhook.office.com/webhookb2/c5d24509-3944-485a-b06e-37ac27294f92@c766b904-8fbf-43be-a845-0cab82a691e9/IncomingWebhook/9368eb879d3d4a50925cb4f1c03b93ce/25a519c0-d1aa-419b-b691-07e22a206b4e")
+    _teams_webhook_url_public = os.getenv("TEAMS_WEBHOOK_URL_PUBLIC", "")
+    _teams_webhook_url_private = os.getenv("TEAMS_WEBHOOK_URL_PRIVATE", "")
     if public and _teams_webhook_url_public is not None:
         requests.post(url=_teams_webhook_url_public, data=data)
 
