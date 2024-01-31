@@ -19,7 +19,8 @@ spec:
     - resource:ecs
     - resource:iam
     - resourcecomponent:lambda
-  environment: my-company-dev
+  environment:
+   - my-company-dev
 
 ---
 apiVersion: backstage.io/v1alpha1
