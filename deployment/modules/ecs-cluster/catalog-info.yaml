@@ -91,3 +91,4 @@ spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
+  subcomponentOf: ecs_cluster
