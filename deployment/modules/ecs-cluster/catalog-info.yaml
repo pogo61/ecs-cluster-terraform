@@ -12,90 +12,78 @@ spec:
     - awsRegion
     - action
   dependsOn:
-    - resourcecomponent:asg
-    - resourcecomponent:cloudwatch
-    - resourcecomponent:data
-    - resourcecomponent:dynamo
-    - resourcecomponent:ecs
-    - resourcecomponent:iam
-    - resourcecomponent:lambda
+    - resource:asg
+    - resource:cloudwatch
+    - resource:data
+    - resource:dynamo
+    - resource:ecs
+    - resource:iam
+    - resource:lambda
   environment: my-company-dev
 
 ---
 apiVersion: backstage.io/v1alpha1
-kind: ResourceComponent
+kind: Resource
 metadata:
   name: asg
   description: asg terraform module
 spec:
   type: terraform
-  lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs-cluster
 
 ---
 apiVersion: backstage.io/v1alpha1
-kind: ResourceComponent
+kind: Resource
 metadata:
   name: cloudwatch
   description: asg terraform module
 spec:
   type: terraform
-  lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs-cluster
 
 ---
 apiVersion: backstage.io/v1alpha1
-kind: ResourceComponent
+kind: Resource
 metadata:
   name: data
   description: asg terraform module
 spec:
   type: terraform
-  lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs-cluster
 
 ---
 apiVersion: backstage.io/v1alpha1
-kind: ResourceComponent
+kind: Resource
 metadata:
   name: dynamo
   description: asg terraform module
 spec:
   type: terraform
-  lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs-cluster
 
 ---
 apiVersion: backstage.io/v1alpha1
-kind: ResourceComponent
+kind: Resource
 metadata:
   name: ecs
   description: asg terraform module
 spec:
   type: terraform
-  lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs-cluster
 
 ---
 apiVersion: backstage.io/v1alpha1
-kind: ResourceComponent
+kind: Resource
 metadata:
   name: iam
   description: asg terraform module
 spec:
   type: terraform
-  lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs-cluster
 
 ---
 apiVersion: backstage.io/v1alpha1
-kind: ResourceComponent
+kind: Resource
 metadata:
   name: lambda
   description: asg terraform module
@@ -103,4 +91,3 @@ spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs-cluster

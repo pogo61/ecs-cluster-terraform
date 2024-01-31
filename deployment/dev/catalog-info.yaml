@@ -3,9 +3,6 @@ kind: Environment
 metadata:
   name: my-company-dev
   description: 'dev environment for My Company'
-#  relations:
-#    - type: hasMember
-#      targetRef: resourcecomponent:ecs-cluster
 spec:
   owner: platform-team
   domain: infrastructure
