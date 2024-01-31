@@ -18,7 +18,7 @@ spec:
     - resource:dynamo
     - resource:ecs
     - resource:iam
-    - resource:lambda
+    - resourcecomponent:lambda
   environment: my-company-dev
 
 ---
@@ -91,4 +91,3 @@ spec:
   type: terraform
   lifecycle: experimental
   owner: platform-team
-  subcomponentOf: ecs_cluster
