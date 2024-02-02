@@ -34,6 +34,17 @@ spec:
 
 ---
 apiVersion: backstage.io/v1alpha1
+kind: ResourceComponent
+metadata:
+  name: lambda
+  description: asg terraform module
+spec:
+  type: terraform
+  lifecycle: experimental
+  owner: platform-team
+
+---
+apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
   name: cloudwatch
@@ -82,13 +93,4 @@ spec:
   type: terraform
   owner: platform-team
 
----
-apiVersion: backstage.io/v1alpha1
-kind: ResourceComponent
-metadata:
-  name: lambda
-  description: asg terraform module
-spec:
-  type: terraform
-  lifecycle: experimental
-  owner: platform-team
+
